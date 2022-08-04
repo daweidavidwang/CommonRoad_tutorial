@@ -1,5 +1,5 @@
-input_path = "Your OpenDRIVE file to convert"  # replace empty string
-output_path = "DESTINATION DIR"
+input_path = "data.xodr"  # replace empty string
+output_path = "."
 # General Imports
 import os
 from lxml import etree
@@ -25,30 +25,3 @@ writer = CommonRoadFileWriter(
 writer.write_to_file(output_path+ "/" + "converted_from_OpenDRIVETest.xml",
                      OverwriteExistingFile.ALWAYS)
 
-from crdesigner.map_conversion.opendrive.opendrive_parser.parser import parse_opendrive
-from crdesigner.map_conversion.opendrive.opendrive_conversion.network import Network
-
-# OpenDRIVE parser to load file
-with open("{}".format(input_path), "r") as file_in:
-    opendrive = parse_opendrive(etree.parse(file_in).getroot())
-
-# create OpenDRIVE intermediate network object
-road_network = Network()
-
-# convert OpenDRIVE file
-road_network.load_opendrive(opendrive)
-
-# export to CommonRoad scenario
-scenario = road_network.export_commonroad_scenario()
-
-# store converted file as CommonRoad scenario
-writer = CommonRoadFileWriter(
-    scenario=scenario,
-    planning_problem_set=PlanningProblemSet(),
-    author="Sebastian Maierhofer",
-    affiliation="Technical University of Munich",
-    source="CommonRoad Scenario Designer",
-    tags={Tag.URBAN},
-)
-writer.write_to_file(os.path.dirname(os.path.realpath(__file__)) + "/" + "ZAM_OpenDRIVETest-1_1-T1.xml",
-                     OverwriteExistingFile.ALWAYS)
