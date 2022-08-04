@@ -30,3 +30,20 @@
 
 3. run python file planning_example.py
 > The black point denotes the vehicle's position. 
+
+
+## Dynamic obstacle example
+> install requirement
+1. pip install lxml
+
+> examine the static scenario 
+2. run dynamic_demo.py
+
+> add dynamic obstacle to ZAM_Tutorial-1_1_no_obs.xml
+3. run dynamic_obstable_example,py
+
+> There will be a new generated file named "output.xml"
+4. modify the first line of dynamic_demo.py to "output.xml"
+
+> run demo again, you will see a moving vehicle in this scenario 
+5. run dynamic_demo.py
