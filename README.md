@@ -1,6 +1,9 @@
 # Install Common-Road #
 > pip install commonroad-all
 
+> git clone https://gitlab.lrz.de/tum-cps/commonroad-scenario-designer.git
+
+> cd commonroad-scenario-designer-main && pip install -r requirements.txt && python setup.py install 
 
 # Run example
 ## Map Convert From OpenDRIVE format
