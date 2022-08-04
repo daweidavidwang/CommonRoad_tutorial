@@ -1,5 +1,5 @@
 #path of the file to be opened
-file_path = "ZAM_OpenDRIVETest-1_1-data.xml"
+file_path = "ZAM_OpenDRIVETest-1_1-T1.xml"
 
 # import functions to read xml file and visualize commonroad objects
 import matplotlib.pyplot as plt
