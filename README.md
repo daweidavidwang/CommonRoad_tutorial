@@ -1,4 +1,6 @@
 # Install Common-Road #
+> create a clean conda environment (python==3.7)
+
 > pip install commonroad-all
 
 > git clone https://gitlab.lrz.de/tum-cps/commonroad-scenario-designer.git
