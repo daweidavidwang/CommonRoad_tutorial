@@ -5,7 +5,7 @@
 
 > cd commonroad-scenario-designer 
 
->conda install -c conda-forge cartopy
+> conda install -c conda-forge cartopy
 
 > pip install -r requirements.txt && python setup.py install 
 
@@ -21,9 +21,10 @@
 > modify the second line in opendrive_demo.py to run other scenario
 
 ## Planning example
-1. 
+> install commonroad planning pack first
+1. git clone https://gitlab.lrz.de/tum-cps/commonroad-search.git
 
+2. cd commonroad-search && pip install -r requirements.txt
 
-
-## Dynamic obstacle example
-
+3. run python file planning_example.py
+> The black point denotes the vehicle's position. 

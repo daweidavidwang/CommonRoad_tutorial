@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.getcwd()+"/commonroad-search")
+
 import matplotlib.pyplot as plt
 from commonroad.visualization.mp_renderer import MPRenderer
 
@@ -7,7 +10,7 @@ from SMP.maneuver_automaton.maneuver_automaton import ManeuverAutomaton
 from SMP.motion_planner.motion_planner import MotionPlanner
 from SMP.motion_planner.utility import MotionPrimitiveStatus, initial_visualization, update_visualization, plot_state
 
-scenario = '/home/micrl/code/commonroad/commonroadsearch/scenarios/tutorial/ZAM_Tutorial_Urban-3_2.xml'
+scenario = 'commonroad-search/scenarios/tutorial/ZAM_Tutorial_Urban-3_2.xml'
 motionprimitives = 'V_9.0_9.0_Vstep_0_SA_-0.2_0.2_SAstep_0.4_T_0.5_Model_BMW320i.xml'
 
 # load scenario and planning problem set, retrieve the first planning problem
