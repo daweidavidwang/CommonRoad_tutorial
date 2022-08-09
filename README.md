@@ -47,3 +47,10 @@
 
 > run demo again, you will see a moving vehicle in this scenario 
 5. run dynamic_demo.py
+
+## IV challenge tutorial
+> install requirements
+1. pip install cvxpy
+
+> run IV_challenge.py
+2. python IV_challenge.py
