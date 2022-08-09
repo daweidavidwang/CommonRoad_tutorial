@@ -54,3 +54,5 @@
 
 > run IV_challenge.py
 2. python IV_challenge.py
+
+> This solution is submitted to: https://commonroad.in.tum.de/solutions/ranking/PM3:WX1:ZAM_Tutorial-1_1_T-1:2020a 

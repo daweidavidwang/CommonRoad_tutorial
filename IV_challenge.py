@@ -208,6 +208,11 @@ v_ego = x_result[1,:].flatten()
 
 # generate state list of the ego vehicle's trajectory
 state_list = [initial_state]
+state_list = []
+## add init state first
+state_list.append(State(**{'position': initial_state.position, 'orientation': initial_state.orientation,
+                               'time_step': 0, 'velocity':initial_state.velocity,
+                               'velocity_y': initial_state.velocity*npy.sin(initial_state.orientation)}))
 for i in range(1, N):
     orientation = initial_state.orientation
     # compute new position
@@ -216,8 +221,8 @@ for i in range(1, N):
                                'time_step': i, 'velocity': v_ego[i]*npy.cos(orientation),
                                'velocity_y': v_ego[i]*npy.sin(orientation)}))
 
-# create the planned trajectory starting at time step 1
-ego_vehicle_trajectory = Trajectory(initial_time_step=1, state_list=state_list[1:])
+# create the planned trajectory starting at time step 0
+ego_vehicle_trajectory = Trajectory(initial_time_step=0, state_list=state_list[0:])
 # create the prediction using the planned trajectory and the shape of the ego vehicle
 
 vehicle3 = parameters_vehicle3.parameters_vehicle3()
@@ -235,13 +240,28 @@ ego_vehicle = DynamicObstacle(obstacle_id=100, obstacle_type=ego_vehicle_type,
 plt.ion()
 plt.figure(figsize=(25, 10))
 # plot the scenario and the ego vehicle for each time step
-for i in range(0, 40):
-    rnd = MPRenderer()
-    scenario.draw(rnd, draw_params={'time_begin': i})
-    ego_vehicle.draw(rnd, draw_params={'time_begin': i, 'dynamic_obstacle': {
-        'vehicle_shape': {'occupancy': {'shape': {'rectangle': {
-            'facecolor': 'g'}}}}}})
-    planning_problem_set.draw(rnd)
-    rnd.render()
-    plt.pause(0.5)
-    plt.clf()
+# for i in range(0, 40):
+#     rnd = MPRenderer()
+#     scenario.draw(rnd, draw_params={'time_begin': i})
+#     ego_vehicle.draw(rnd, draw_params={'time_begin': i, 'dynamic_obstacle': {
+#         'vehicle_shape': {'occupancy': {'shape': {'rectangle': {
+#             'facecolor': 'g'}}}}}})
+#     planning_problem_set.draw(rnd)
+#     rnd.render()
+#     plt.pause(0.5)
+#     plt.clf()
+
+from commonroad.common.solution import CommonRoadSolutionWriter, Solution, PlanningProblemSolution, VehicleModel, VehicleType, CostFunction
+
+pps = PlanningProblemSolution(planning_problem_id=100,
+                              vehicle_type=VehicleType.VW_VANAGON,
+                              vehicle_model=VehicleModel.PM,
+                              cost_function=CostFunction.WX1,
+                              trajectory=ego_vehicle_prediction.trajectory)
+
+# define the object with necessary attributes.
+solution = Solution(scenario.scenario_id, [pps], computation_time=prob.solver_stats.solve_time)
+
+# write solution to a xml file
+csw = CommonRoadSolutionWriter(solution)
+csw.write_to_file(overwrite=True)
