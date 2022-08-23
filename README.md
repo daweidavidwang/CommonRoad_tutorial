@@ -56,3 +56,27 @@
 2. python IV_challenge.py
 
 > This solution is submitted to: https://commonroad.in.tum.de/solutions/ranking/PM3:WX1:ZAM_Tutorial-1_1_T-1:2020a 
+
+
+## planning example with route planner
+> install requirements
+1. pip install commonroad-route-planner
+
+
+## RL example
+> install requirements
+1. sudo apt-get install libeigen3-dev libboost-all-dev libomp-dev
+2. ./install_commonroad_rl.sh
+
+> generate data for RL training
+1. python -m commonroad_rl.tools.pickle_scenario.xml_to_pickle -i scenario/inceptio_highway -o  scenario/pickle/ 
+
+> train your RL model
+1. python RL_example.py
+
+> test and plot result
+1. python -m commonroad_rl.evaluate_model \
+          --algo ppo2 \
+          --model_path logs \
+          --test_path scenario/pickle/  \
+          --viz_path imgs
